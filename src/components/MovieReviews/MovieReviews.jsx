@@ -28,17 +28,28 @@ const MovieReviews = () => {
       abortController.abort();
     };
   }, [movieId]);
+  const formatDateFull = (isoString) => {
+    const date = new Date(isoString);
+    return date.toLocaleDateString("en-US", {
+      weekday: "short",
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+  };
+
   return (
     <div>
-      {console.log(reviews)}
       {reviews.total_results > 0 ? (
         <ul>
           {reviews.results.map(({ author, created_at, id, content }) => {
-            <li key={id}>
-              <p>Author: {author}</p>
-              <p>{created_at}</p>
-              <p>{content}</p>
-            </li>;
+            return (
+              <li key={id}>
+                <p>Author: {author}</p>
+                <p>{formatDateFull(created_at)}</p>
+                <p>{content}</p>
+              </li>
+            );
           })}
         </ul>
       ) : (

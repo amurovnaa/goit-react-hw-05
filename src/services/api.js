@@ -6,7 +6,7 @@ export const api_access_token =
   "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNzliZDkxYjczNDQwZmZhMTg4ZDBlZGY2ZGIxOWRiNSIsIm5iZiI6MTc0NDk3NTY4OC41OCwic3ViIjoiNjgwMjM3NDhiMTEzZmY4NzIzZDk5YTk4Iiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.FC9W-rs_JYoFcBYhP_o_jm0Y12PRxQRu-ZYG-OyoC";
 const end_points = {
   trending: "/trending/movie/day",
-  querySearch: "/search/movie",
+  searchByQuery: "/search/movie",
   movieDetails: "/movie",
   movieCredits: "/credits",
   movieReviews: "/reviews",
@@ -15,6 +15,13 @@ const end_points = {
 export const fetchTrendingMovies = async (page, signal) => {
   const res = await axios.get(
     `${end_points.trending}?api_key=${api_key}&page=${page}`,
+    { signal }
+  );
+  return res.data;
+};
+export const fetchMoviesByQuery = async (query, page, signal) => {
+  const res = await axios.get(
+    `${end_points.searchByQuery}?api_key=${api_key}&page=${page}&query=${query}&language=en-US&include_adult=false`,
     { signal }
   );
   return res.data;
@@ -30,6 +37,13 @@ export const fetchMovieDetails = async (movieId, signal) => {
 export const fetchMovieReviews = async (movieId, signal) => {
   const res = await axios.get(
     `/movie/${movieId}${end_points.movieReviews}?api_key=${api_key}`,
+    { signal }
+  );
+  return res.data;
+};
+export const fetchMovieCast = async (movieId, signal) => {
+  const res = await axios.get(
+    `/movie/${movieId}${end_points.movieCredits}?api_key=${api_key}`,
     { signal }
   );
   return res.data;

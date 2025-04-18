@@ -13,11 +13,9 @@ import GoBackBtn from "../../components/GoBackBtn/GoBackBtn";
 const MovieDetailsPage = () => {
   const [movie, setMovie] = useState({});
   const [isError, setIsError] = useState(false);
-
   const { movieId } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
-  console.log(location);
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -40,22 +38,27 @@ const MovieDetailsPage = () => {
       abortController.abort();
     };
   }, [movieId]);
-  const handleClick = () => navigate(location?.state?.from ?? "/");
-  const getYear = () => new Date(movie.release_date).getFullYear();
+  const handleClick = () => navigate(location?.state?.from ?? "/movies");
+  const getYear = (date) => new Date(date).getFullYear();
+  const getUserScorePercent = (num) => {
+    return Math.round((num / 1000) * 100);
+  };
   return (
     <div>
       {console.log(movie)}
       <GoBackBtn onClick={handleClick} />
       {movie && (
         <div>
+          <img
+            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+            alt={movie.title}
+          />
           <div>
             <h1>
-              {movie.title} ({getYear()})
+              {movie.title} ({getYear(movie.release_date)})
             </h1>
             <div>
-              <h2>
-                User Score: {Math.round((movie.popularity / 1000) * 100)}%
-              </h2>
+              <h2>User Score: {getUserScorePercent(movie.popularity)}%</h2>
               <progress value={movie.popularity} max={1000}></progress>
             </div>
             <div>

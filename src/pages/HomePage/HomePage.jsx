@@ -40,6 +40,7 @@ const HomePage = () => {
   };
   return (
     <>
+      {console.log(movies)}
       <h1>Trending Today</h1>
       <MovieList dataMovies={movies.results} />
       {changeTotalPages > -1 && <LoadMoreBtn onClick={handleLoadMore} />}
