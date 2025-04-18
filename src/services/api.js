@@ -14,10 +14,23 @@ const end_points = {
 
 export const fetchTrendingMovies = async (page, signal) => {
   const res = await axios.get(
-    `${end_points.trending}?api_key=${api_key}&page=${page}&language=en-US&include_adult=false`,
-    {
-      signal,
-    }
+    `${end_points.trending}?api_key=${api_key}&page=${page}`,
+    { signal }
+  );
+  return res.data;
+};
+
+export const fetchMovieDetails = async (movieId, signal) => {
+  const res = await axios.get(
+    `${end_points.movieDetails}/${movieId}?api_key=${api_key}`,
+    { signal }
+  );
+  return res.data;
+};
+export const fetchMovieReviews = async (movieId, signal) => {
+  const res = await axios.get(
+    `/movie/${movieId}${end_points.movieReviews}?api_key=${api_key}`,
+    { signal }
   );
   return res.data;
 };
