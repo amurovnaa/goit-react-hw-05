@@ -1,0 +1,37 @@
+.section {
+  margin-bottom: 24px;
+  margin-top: 32px;
+}
+.link {
+  text-decoration: none;
+  color: black;
+}
+.active {
+  text-decoration: none;
+  color: #894848cc;
+  font-weight: 600;
+}
+.list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 26px;
+  font-size: 18px;
+}
+.item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #894848cc;
+  width: 120px;
+  padding: 8px 16px;
+  border-radius: 16px;
+  align-items: center;
+  color: #fff;
+  font-size: 18px;
+  transition: 0.3s;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.05);
+  }
+}

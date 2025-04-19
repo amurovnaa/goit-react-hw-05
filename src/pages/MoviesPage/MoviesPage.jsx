@@ -5,6 +5,7 @@ import { fetchMoviesByQuery } from "../../services/api";
 import { useState, useEffect } from "react";
 import { toast, Toaster } from "react-hot-toast";
 import { useLocation, useSearchParams } from "react-router-dom";
+import s from "./MoviesPage.module.css";
 
 const MoviesPage = () => {
   const [movies, setMovies] = useState({ results: [], total_pages: 1 });
@@ -71,9 +72,9 @@ const MoviesPage = () => {
       {console.log(movies)}
       <SearchForm handleChangeQuery={handleChangeQuery} />
       {query === "" ? (
-        <p>Start your movie search</p>
+        <p className={s.info}>Start your movie search</p>
       ) : filteredData.length === 0 ? (
-        <p>No movies found</p>
+        <p className={s.info}>No movies found</p>
       ) : (
         <MovieList dataMovies={filteredData} prevLocation={location} />
       )}
