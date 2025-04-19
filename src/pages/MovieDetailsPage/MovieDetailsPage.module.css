@@ -1,0 +1,36 @@
+.moviePageContainer {
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+.detailsContainer {
+  display: flex;
+  gap: 16px;
+}
+.img {
+  border-radius: 24px;
+  width: 360px;
+  height: 500px;
+}
+.genresList,
+.linksList {
+  display: flex;
+  gap: 6px;
+}
+.linksList {
+  flex-direction: column;
+}
+.link {
+  text-decoration: none;
+  color: black;
+}
+.active {
+  text-decoration: none;
+  color: #a75d5dcc;
+  font-weight: 600;
+}
+.line {
+  border: 0;
+  height: 1px;
+  background-color: #4f2b2bcc;
+}

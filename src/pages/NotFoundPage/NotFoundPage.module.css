@@ -1,0 +1,6 @@
+.container {
+  display: flex;
+  justify-content: center;
+  color: black;
+  font-size: 10px;
+}

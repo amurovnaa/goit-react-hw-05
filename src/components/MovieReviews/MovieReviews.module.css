@@ -1,0 +1,17 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.item {
+  border: 1px solid #4f2b2bcc;
+  padding: 16px;
+  border-radius: 24px;
+}
+.author {
+  font-weight: 600;
+  font-size: 15px;
+}
+.date {
+  font-size: 13px;
+}

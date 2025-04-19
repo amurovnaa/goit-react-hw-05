@@ -4,6 +4,8 @@ import { useLocation, useSearchParams } from "react-router-dom";
 import { toast, Toaster } from "react-hot-toast";
 import { fetchTrendingMovies } from "../../services/api";
 import LoadMoreBtn from "../../components/LoadMoreBtn/LoadMoreBtn";
+import s from "./HomePage.module.css";
+
 const HomePage = () => {
   const [movies, setMovies] = useState({ results: [], total_pages: 1 });
   const [page, setPage] = useState(1);
@@ -54,7 +56,7 @@ const HomePage = () => {
   return (
     <>
       {console.log(movies)}
-      <h1>Trending Today</h1>
+      <h1 className={s.title}>Trending Today</h1>
       <MovieList dataMovies={movies.results} prevLocation={location} />
       {page < movies.total_pages && <LoadMoreBtn onClick={handleLoadMore} />}
       <Toaster position="top-right" />

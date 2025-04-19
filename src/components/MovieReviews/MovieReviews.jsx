@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchMovieReviews } from "../../services/api";
 import { toast, Toaster } from "react-hot-toast";
+import s from "./MovieReviews.module.css";
 
 const MovieReviews = () => {
   const [reviews, setReviews] = useState({});
@@ -39,14 +40,14 @@ const MovieReviews = () => {
   };
 
   return (
-    <div>
+    <div className={s.wrapper}>
       {reviews.total_results > 0 ? (
-        <ul>
+        <ul className={s.list}>
           {reviews.results.map(({ author, created_at, id, content }) => {
             return (
-              <li key={id}>
-                <p>Author: {author}</p>
-                <p>{formatDateFull(created_at)}</p>
+              <li key={id} className={s.item}>
+                <p className={s.author}>Author: {author}</p>
+                <p className={s.date}>{formatDateFull(created_at)}</p>
                 <p>{content}</p>
               </li>
             );

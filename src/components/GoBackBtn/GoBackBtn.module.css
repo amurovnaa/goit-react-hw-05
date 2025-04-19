@@ -1,11 +1,7 @@
-.wrapper {
-  display: flex;
-  justify-content: center;
-}
 .button {
   padding: 16px;
   background-color: #a75d5dcc;
-  width: 160px;
+  width: 110px;
   padding: 8px 16px;
   border-radius: 16px;
   align-items: center;
@@ -15,4 +11,5 @@
   &:hover {
     transform: scale(1.05);
   }
+  margin-bottom: 24px;
 }

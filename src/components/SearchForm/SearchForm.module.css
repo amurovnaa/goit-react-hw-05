@@ -22,13 +22,13 @@
 .input {
   width: 320px;
   height: 16px;
-  border: 2px solid #d36f6fcc;
+  border: 2px solid #8d4d4dcc;
   padding: 8px 16px;
   border-radius: 16px;
 }
 .button {
   padding: 16px;
-  background-color: #d36f6fcc;
+  background-color: #8d4d4dcc;
   width: 160px;
 
   padding: 8px 16px;

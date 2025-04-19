@@ -1,0 +1,16 @@
+.img {
+  width: 140px;
+  height: 200px;
+  border-radius: 32px;
+}
+.list {
+  display: flex;
+  align-items: center;
+  row-gap: 100px;
+  column-gap: 16px;
+  flex-wrap: wrap;
+}
+.item {
+  max-width: 140px;
+  max-height: 200px;
+}

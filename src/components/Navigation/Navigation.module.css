@@ -5,10 +5,11 @@
 .link {
   text-decoration: none;
   color: black;
+  font-weight: 600;
 }
 .active {
   text-decoration: none;
-  color: #894848cc;
+  color: #4f2b2bcc;
   font-weight: 600;
 }
 .list {
@@ -22,7 +23,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #894848cc;
+  border: 1px solid #4f2b2bcc;
   width: 120px;
   padding: 8px 16px;
   border-radius: 16px;

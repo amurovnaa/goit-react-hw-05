@@ -1,7 +1,11 @@
+import s from "./GoBackBtn.module.css";
+
 const GoBackBtn = ({ onClick }) => {
   return (
     <>
-      <button onClick={() => onClick()}>Go Back</button>
+      <button className={s.button} onClick={() => onClick()}>
+        Go Back
+      </button>
     </>
   );
 };

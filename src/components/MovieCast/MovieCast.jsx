@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchMovieCast } from "../../services/api";
 import { toast, Toaster } from "react-hot-toast";
+import s from "./MovieCast.module.css";
 
 const MovieCast = () => {
   const [credits, setCredits] = useState({});
@@ -30,22 +31,21 @@ const MovieCast = () => {
     };
   }, [movieId]);
   return (
-    <div>
+    <div className={s.wrapper}>
       {console.log(credits.cast)}
       {credits.cast?.length > 0 ? (
-        <ul>
+        <ul className={s.list}>
           {credits.cast.map(({ name, character, id, profile_path }) => {
             return (
-              <ul>
-                <li key={id}>
-                  <img
-                    src={`https://image.tmdb.org/t/p/w500${profile_path}`}
-                    alt={name}
-                  />
-                  <p>{name}</p>
-                  <p>Character: {character}</p>
-                </li>
-              </ul>
+              <li key={id} className={s.item}>
+                <img
+                  src={`https://image.tmdb.org/t/p/w500${profile_path}`}
+                  alt={name}
+                  className={s.img}
+                />
+                <p>{name}</p>
+                <p>Character: {character}</p>
+              </li>
             );
           })}
         </ul>
