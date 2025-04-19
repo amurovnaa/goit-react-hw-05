@@ -1,5 +1,6 @@
 import MovieList from "../../components/MovieList/MovieList";
 import { useState, useEffect } from "react";
+import { useLocation, useSearchParams } from "react-router-dom";
 import { toast, Toaster } from "react-hot-toast";
 import { fetchTrendingMovies } from "../../services/api";
 import LoadMoreBtn from "../../components/LoadMoreBtn/LoadMoreBtn";
@@ -7,6 +8,11 @@ const HomePage = () => {
   const [movies, setMovies] = useState({ results: [], total_pages: 1 });
   const [page, setPage] = useState(1);
   const [isError, setIsError] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const location = useLocation();
+  const savedPage = parseInt(searchParams.get("page")) || 1;
+
   useEffect(() => {
     const abortController = new AbortController();
 
@@ -33,17 +39,24 @@ const HomePage = () => {
     };
   }, [page]);
 
-  const nextPage = page + 1;
-  const changeTotalPages = movies.total_pages - nextPage;
+  useEffect(() => {
+    if (savedPage > 1) {
+      setPage(savedPage);
+    }
+  }, [savedPage]);
+
   const handleLoadMore = () => {
-    setPage(nextPage);
+    const newPage = page + 1;
+    setPage(newPage);
+    searchParams.set("page", newPage.toString());
+    setSearchParams(searchParams);
   };
   return (
     <>
       {console.log(movies)}
       <h1>Trending Today</h1>
-      <MovieList dataMovies={movies.results} />
-      {changeTotalPages > -1 && <LoadMoreBtn onClick={handleLoadMore} />}
+      <MovieList dataMovies={movies.results} prevLocation={location} />
+      {page < movies.total_pages && <LoadMoreBtn onClick={handleLoadMore} />}
       <Toaster position="top-right" />
     </>
   );

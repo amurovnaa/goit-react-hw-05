@@ -1,13 +1,11 @@
 import { Link, useLocation } from "react-router-dom";
 
-const MovieList = ({ dataMovies }) => {
-  const location = useLocation();
-  console.log(location);
+const MovieList = ({ dataMovies, prevLocation }) => {
   return (
     <ul>
       {dataMovies.map(({ id, title }) => (
         <li key={id}>
-          <Link state={location} to={`/movies/${id}`}>
+          <Link state={{ from: prevLocation }} to={`/movies/${id}`}>
             {title}
           </Link>
         </li>

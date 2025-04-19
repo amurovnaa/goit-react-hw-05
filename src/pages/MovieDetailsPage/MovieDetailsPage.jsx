@@ -16,7 +16,7 @@ const MovieDetailsPage = () => {
   const { movieId } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
-
+  const handleClick = () => navigate(location.state?.from ?? "/movies");
   useEffect(() => {
     const abortController = new AbortController();
     const getMovieDetails = async () => {
@@ -38,7 +38,7 @@ const MovieDetailsPage = () => {
       abortController.abort();
     };
   }, [movieId]);
-  const handleClick = () => navigate(location?.state?.from ?? "/movies");
+
   const getYear = (date) => new Date(date).getFullYear();
   const getUserScorePercent = (num) => {
     return Math.round((num / 1000) * 100);

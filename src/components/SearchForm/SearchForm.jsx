@@ -9,8 +9,8 @@ const SearchForm = ({ handleChangeQuery }) => {
     query: "",
   };
   const handleSubmit = (values, options) => {
-    if (values.query.trim() === "") {
-      toast.error("Enter a keyword");
+    if (values.query.toLowerCase().trim() === "") {
+      toast.error("Enter the film title");
       return;
     }
 
@@ -29,7 +29,7 @@ const SearchForm = ({ handleChangeQuery }) => {
               className={s.input}
               name="query"
               id={keywordId}
-              placeholder="Enter a keyword"
+              placeholder="Enter the movie title"
             />
           </div>
           <button className={s.button} type="submit">

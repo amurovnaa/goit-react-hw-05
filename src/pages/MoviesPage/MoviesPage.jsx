@@ -10,8 +10,11 @@ const MoviesPage = () => {
   const [movies, setMovies] = useState({ results: [], total_pages: 1 });
   const [page, setPage] = useState(1);
   const [searchParams, setSearchParams] = useSearchParams();
-  const query = searchParams.get("query") ?? "";
   const [isError, setIsError] = useState(false);
+
+  const location = useLocation();
+  const query = searchParams.get("query") ?? "";
+  const savedPage = parseInt(searchParams.get("page")) || 1;
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -26,9 +29,6 @@ const MoviesPage = () => {
           results: [...prev.results, ...data.results],
           total_pages: data.total_pages,
         }));
-        if (data.results.length === 0) {
-          toast.error("No movies found...");
-        }
       } catch (error) {
         if (error.code !== "ERR_CANCELED") {
           setIsError(true);
@@ -41,32 +41,43 @@ const MoviesPage = () => {
     return () => {
       abortController.abort();
     };
-  }, [page]);
+  }, [query, page]);
+
+  useEffect(() => {
+    setPage(savedPage);
+  }, [savedPage]);
+
   const handleChangeQuery = (newValue) => {
-    if (!newValue) {
-      searchParams.delete("query");
-      return setSearchParams(searchParams);
+    const params = new URLSearchParams();
+    if (newValue) {
+      params.set("query", newValue);
+      params.set("page", "1");
     }
-    searchParams.set("query", newValue);
-    // searchParams.set('test', 12345);
-    // searchParams.set('size', 'sm');
-    // searchParams.set('isLoggedIn', true);
-    setSearchParams(searchParams);
+    setMovies({ results: [], total_pages: 1 });
+    setSearchParams(params);
   };
-  const filteredData = movies.results.filter(
-    (movie) => movie.title.toLowerCase().includes(query.toLowerCase())
-    // user.lastName.toLowerCase().includes(query.toLowerCase())
+  const filteredData = movies.results.filter((movie) =>
+    movie.title.toLowerCase().includes(query.toLowerCase())
   );
-  const nextPage = page + 1;
-  const changeTotalPages = movies.total_pages - nextPage;
+  const newPage = page + 1;
+  const changeTotalPages = movies.total_pages - newPage;
   const handleLoadMore = () => {
-    setPage(nextPage);
+    setPage(newPage);
+    searchParams.set("page", newPage.toString());
+    setSearchParams(searchParams);
   };
   return (
     <>
       {console.log(movies)}
       <SearchForm handleChangeQuery={handleChangeQuery} />
-      <MovieList dataMovies={filteredData} />
+      {query === "" ? (
+        <p>Start your movie search</p>
+      ) : filteredData.length === 0 ? (
+        <p>No movies found</p>
+      ) : (
+        <MovieList dataMovies={filteredData} prevLocation={location} />
+      )}
+
       {changeTotalPages > -1 && <LoadMoreBtn onClick={handleLoadMore} />}
       <Toaster position="top-right" />
     </>
